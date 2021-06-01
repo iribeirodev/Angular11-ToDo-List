@@ -1,0 +1,35 @@
+<form [formGroup]="modalForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{data.dialogTitle}}</h1>
+  <hr>  
+  <div class="form-container">
+    <div class="card">
+      <div class="card-body">
+        <div class="form-container">
+
+          <div class="form-row">
+            <div class="form-group row top-margin-buffer">
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter a Title">
+              </div>
+            </div>
+            <br>
+            <div class="form-group row top-margin-buffer">
+              <div class="col-sm-10">
+                <textarea class="form-control" id="content" rows="3" formControlName="content"
+                  placeholder="Describe your task"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <div class="d-flex justify-content-between">
+          <button type="submit" 
+                  class="btn btn-primary" 
+                  [disabled]="!modalForm.valid" >Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,17 @@
+.toolbarLayout {
+  flex: 1 1 auto;
+}
+
+.box {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+.item {
+	margin-left: 20px;
+}
+h5 {
+	color: #fff;
+	font-size: 0.80em;
+}
+

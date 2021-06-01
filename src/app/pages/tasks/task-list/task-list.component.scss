@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.small-icon-button {
+  height: 12px;
+  width: 12px;
+  font-size: 12px;
+
+  line-height: 12px;
+}
+.icon-text {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+}

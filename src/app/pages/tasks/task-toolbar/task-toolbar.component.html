@@ -1,0 +1,21 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <span>Task List</span>
+    <span class="toolbarLayout"></span>
+
+    <div class="box">
+      <div class="item">
+        <h5>Filter title:</h5>
+      </div>
+      <div class="item">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Title beginning with">
+      </div>
+      <div class="item">
+        <button color="secondary" (click)="openDialog()" mat-icon-button aria-label="New Task">
+          <mat-icon>note_add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>

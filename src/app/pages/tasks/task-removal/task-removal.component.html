@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-body">
+        <div class="form-container">
+            <div class="form-row">
+                <div class="form-group row top-margin-buffer">
+                    <h2>Confirm Removal of the Selected Task?</h2>
+                    <ul>
+                        <li>{{this.title}}</li>
+                    </ul>
+                </div>
+                <br>
+                <div class="top-margin-buffer">
+                    <button mat-button color="primary" (click)="remove()">Yes</button>
+                    <button mat-button color="accent" (click)="close()" >No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
