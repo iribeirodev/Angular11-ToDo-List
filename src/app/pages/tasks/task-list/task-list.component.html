@@ -1,6 +1,8 @@
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortActive="title" matSortDirection="asc">
     <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <!-- Não utilizou o dicionário de strings (en-us.json e pipe Translate do TranslateModule) -->
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th> 
+        <!-- Não é um problema, mas seria interessante utilizar "?" antes do acesso de propriedades para evitar erros caso element esteja null, por exemplo-->
         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
     </ng-container>
 
@@ -12,6 +14,7 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
+            <!-- O Estilo de mat-button não aplicou pq vc não importou o módulo -->
             <button mat-button aria-label="Edit Task" (click)="editClicked(row)">
                 <mat-icon>edit</mat-icon>
             </button>

@@ -9,7 +9,11 @@ import { TaskModalComponent } from "../task-modal/task-modal.component";
   styleUrls: ["./task-toolbar.component.scss"],
 })
 export class TaskToolbarComponent implements OnInit {
-  constructor(public dialog: MatDialog, private pubSubService: PubsubService) {}
+  // A partir de 2 injeções, vc quebra linha entre elas
+  constructor(
+    public dialog: MatDialog, 
+    private pubSubService: PubsubService
+  ) {}
 
   openDialog(): void {
     this.pubSubService.emit("taskSelected", null);
@@ -18,7 +22,7 @@ export class TaskToolbarComponent implements OnInit {
       data: { dialogTitle: "New Task" },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => { // Não usa o subscription/result
       //console.log(result);
     });
   }
@@ -30,7 +34,7 @@ export class TaskToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.pubSubService
       .get("closeModal")
-      .asObservable()
+      .asObservable() // Desnecessário
       .subscribe((e) => {
         if (e !== null) this.dialog.closeAll();
       });

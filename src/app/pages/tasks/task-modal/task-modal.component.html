@@ -25,6 +25,16 @@
       </div>
       <div class="card-footer">
         <div class="d-flex justify-content-between">
+          <!-- 
+            Apenas PREFERENCIA de código, mas eu faria assim:
+              <button type="submit" 
+                class="btn btn-primary" 
+                [disabled]="!modalForm.valid">
+                Save
+              </button>
+
+            Outra coisa, vc não usou o dicionário de strings e o pipe translate.
+          -->
           <button type="submit" 
                   class="btn btn-primary" 
                   [disabled]="!modalForm.valid" >Save</button>

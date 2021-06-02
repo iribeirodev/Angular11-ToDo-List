@@ -43,7 +43,7 @@ export class TaskListComponent implements OnInit {
 
     this.dataSource = data.sort((a, b) => {
       const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
+      switch (sort.active) { // Poderia ter feito um IF/ELSE ao invés de um switch, visto que é uma prop apenas.
         case 'title': return compare(a.title, b.title, isAsc);
         default: return 0;
       }
@@ -55,13 +55,13 @@ export class TaskListComponent implements OnInit {
    */
   notifyFilter(): void {
     this.pubSubService.get('taskFiltered')
-        .asObservable()
+        .asObservable() // Não precisava desse asObservable
         .subscribe(e => {
             this.dataSource = this.todos;
             if (e !== null) {
               this.dataSource = this.dataSource.filter((t) => {
-                return t.title.toLowerCase() 
-                        .startsWith(e.toLowerCase());
+                return t.title.toLowerCase() // Poderia criar um StringUtils com essas funções de checagem
+                        .startsWith(e.toLowerCase()); // Não use busca apenas pelo começo da string, mas por substrings (indexOf("filter") >= 0)
               });
             }
         });    
@@ -73,7 +73,7 @@ export class TaskListComponent implements OnInit {
   refresh(): void {
     this.todoService.getAllTasks().subscribe((todos) => {
       this.todos = todos;
-      this.dataSource = this.todos.slice();
+      this.dataSource = this.todos.slice(); // Pq esse slice? Se era pra diferenciar arrays, no pior caso poderia fazer [...(this.todos = todos)] ou [...this.todos]
     });
   }
 
@@ -82,10 +82,10 @@ export class TaskListComponent implements OnInit {
    */
   openDialog(title: string): void {
     this.dialogRef = this.dialog.open(TaskModalComponent, {
-      data: { dialogTitle: title}
+      data: { dialogTitle: title} // Poderia ter um espaço entre "title}" (lint pegaria isso)
     });
 
-    this.dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => { // Result não é utilizado.
       this.refresh();
     });
   }  
@@ -98,7 +98,7 @@ export class TaskListComponent implements OnInit {
       data: []
     });
 
-    this.dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => { // Result não é utilizado.
       this.refresh();
     });    
   }
@@ -111,9 +111,9 @@ export class TaskListComponent implements OnInit {
     this.pubSubService.emit("taskSelected", row);
     this.pubSubService.get('closeModal').asObservable()
         .subscribe(e => {
-          if (e !== null) {
+          if (e !== null) { // Poderia ter um pipe filtrando para pegar eventos que não fossem nulos
             this.dialogRef.close();
-            this.refresh();
+            this.refresh(); // Não está funcionando
           }
         });
     this.openDialog('Edit Task');
@@ -125,15 +125,17 @@ export class TaskListComponent implements OnInit {
    */
   removeClicked(row) {
     this.pubSubService.emit("taskSelected", row);
-    this.openRemovalDialog();
+    this.openRemovalDialog(); // Deveria subscrever o retorno para atualizar a lista.
   }
 }
 
 /**
  * Sort comparable function
+ * Faltou declaração dos Parametros e retorno
  */
-function compare(a: number | string, b: number | string, isAsc: boolean) {
+function compare(a: number | string, b: number | string, isAsc: boolean) { //Não declarou o tipo de retorno
+  // Esse compare poderia estar numa classe utilitária para que pudesse ser reutilizado
   if (typeof a === 'string') a = a.toLowerCase();
   if (typeof b === 'string') b = b.toLowerCase();
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1); // Entendo que faz o trabalho, mas não ficou muito clara essa linha. Carecia, de repente, um comentário.
 }

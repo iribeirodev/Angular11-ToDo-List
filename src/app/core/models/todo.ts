@@ -5,5 +5,5 @@ export class ToDo {
     title:      string;
     content:    string;
     createdAt:  Date;
-    data?:      SubItem
+    data?:      SubItem // Faltou ";". É importante manter padrões.
 }

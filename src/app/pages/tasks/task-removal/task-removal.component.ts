@@ -21,7 +21,7 @@ export class TaskRemovalComponent implements OnInit {
   ngOnInit(): void {
     // Check notifications for any task selected
     this.pubSubService.get('taskSelected')
-        .asObservable()
+        .asObservable() // Desnecessário
         .subscribe(e => {
           if (e !== null) {
             this.id = e.id;

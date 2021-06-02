@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskDashboardComponent implements OnInit {
 
+  // Não se deixa bloco vazio em código. Se tivesse executado "npm run lint" veria os problemas relacionados a isso!
   constructor() { }
 
   ngOnInit(): void {
